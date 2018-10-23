@@ -25,8 +25,7 @@ public class ExcelArea extends MyPanel implements ActionListener {
         nextButton.addActionListener(this);
         whatToTranslateTextField.addActionListener(this);
     }
-
-
+    
     public void importWords() {
         try {
             workbook = new HSSFWorkbook(new FileInputStream("M:\\Java Projects\\mateuszwordies\\tester.xls"));
