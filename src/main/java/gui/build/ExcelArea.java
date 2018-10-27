@@ -3,10 +3,9 @@ package gui.build;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.FileInputStream;
 import java.util.Random;
 
@@ -19,13 +18,16 @@ public class ExcelArea extends MyPanel implements ActionListener {
     private int numberOfrow = 0;
     String[] translateToArray = new String[1];
     private int counter = 0;
+    ResultWindow resultWindow;
+    MyFrame mainFrame;
+
 
     public ExcelArea() {
         importWords();
         nextButton.addActionListener(this);
         whatToTranslateTextField.addActionListener(this);
     }
-    
+
     public void importWords() {
         try {
             workbook = new HSSFWorkbook(new FileInputStream("M:\\Java Projects\\mateuszwordies\\tester.xls"));
@@ -39,7 +41,8 @@ public class ExcelArea extends MyPanel implements ActionListener {
 
     }
 
-        public void actionPerformed (ActionEvent e){
+
+    public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
         if (source == nextButton) {
@@ -52,22 +55,23 @@ public class ExcelArea extends MyPanel implements ActionListener {
 
             String output = whatToTranslateTextField.getText();
 
-                if (output.equals(translateToArray[0])) {
-                    System.out.println("dobrze");
-                    positiveResultLabel.setVisible(true);
-                    negativeResultLabel.setVisible(false);
-                    whatToTranslateTextField.setText("");
-                    removeRow(sheet, numberOfrow);
-                    generateWord();
-                    counter--;
-                    //System.out.println(counter);
-                } else {
-                    System.out.println("zle");
-                    whatToTranslateTextField.setText("");
-                    negativeResultLabel.setVisible(true);
-                    positiveResultLabel.setVisible(false);
-                    //System.out.println(counter);
-                }
+            if (output.equals(translateToArray[0])) {
+                System.out.println("dobrze");
+                positiveResultLabel.setVisible(true);
+                negativeResultLabel.setVisible(false);
+                whatToTranslateTextField.setText("");
+                removeRow(sheet, numberOfrow);
+                generateWord();
+                counter--;
+                System.out.println(counter); // <-- licznik slow
+            }
+            else {
+                System.out.println("zle");
+                whatToTranslateTextField.setText("");
+                negativeResultLabel.setVisible(true);
+                positiveResultLabel.setVisible(false);
+                //System.out.println(counter);
+            }
         }
     }
 
@@ -85,20 +89,24 @@ public class ExcelArea extends MyPanel implements ActionListener {
         }
     }
 
+
+
     private void generateWord() {
-        Random random = new Random();
-        int words_amount = sheet.getLastRowNum();
-        int num = random.nextInt(words_amount + 1);
-        HSSFRow randomRow = sheet.getRow(num);
-        numberOfrow = num;
-        translateItLabel.setText(randomRow.getCell(0).getStringCellValue());
-        translateToArray[0] = randomRow.getCell(1).getStringCellValue();
+        try {
+            Random random = new Random();
+            int words_amount = sheet.getLastRowNum();
+            int num = random.nextInt(words_amount + 1);
+            HSSFRow randomRow = sheet.getRow(num);
+            numberOfrow = num;
+            translateItLabel.setText(randomRow.getCell(0).getStringCellValue());
+            translateToArray[0] = randomRow.getCell(1).getStringCellValue();
+        } catch (NullPointerException e) {
+            resultWindow = new ResultWindow();
+
+
+            System.out.println("Koniec");
+        }
     }
-
-
-
-
-
 }
 
 

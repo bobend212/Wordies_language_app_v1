@@ -11,6 +11,7 @@ public class MyPanel extends JPanel {
     public JButton nextButton;
 
 
+
     public MyPanel() {
 
         setLayout(null);

@@ -1,6 +1,7 @@
 package gui.build;
 
 import javax.swing.*;
+import java.awt.event.WindowEvent;
 
 public class MyFrame extends JFrame {
 
@@ -27,6 +28,10 @@ public class MyFrame extends JFrame {
 
         ExcelArea excelArea = new ExcelArea();
         add(excelArea);
+
+
     }
+
+
 
 }
