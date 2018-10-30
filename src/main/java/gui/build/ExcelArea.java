@@ -6,6 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.FileInputStream;
 import java.util.Random;
 
@@ -22,6 +23,16 @@ public class ExcelArea extends MyPanel implements ActionListener {
     MyFrame mainFrame;
 
 
+
+    String xyz = "M:\\Java Projects\\mateuszwordies\\tester.xls";
+    File file = new File(xyz);
+
+    FileInputStream fis = null;
+
+
+
+
+
     public ExcelArea() {
         importWords();
         nextButton.addActionListener(this);
@@ -30,14 +41,16 @@ public class ExcelArea extends MyPanel implements ActionListener {
 
     public void importWords() {
         try {
-            workbook = new HSSFWorkbook(new FileInputStream("M:\\Java Projects\\mateuszwordies\\tester.xls"));
+            workbook = new HSSFWorkbook(new FileInputStream(file));
             sheet = workbook.getSheetAt(0);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         int wordsQty = sheet.getLastRowNum() + 1;
         counter = wordsQty;
+
 
     }
 

@@ -1,11 +1,17 @@
 package gui.build;
 
 import javax.swing.*;
-import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
-public class MyFrame extends JFrame {
+public class MyFrame extends JFrame implements ActionListener {
 
-
+    JMenuBar menu;
+    JMenu file;
+    JMenuItem loadFile;
+    public String path;
+    public File plik;
 
     public MyFrame() {
 
@@ -20,6 +26,7 @@ public class MyFrame extends JFrame {
         //setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+        //setLayout(null);
 
 
 
@@ -30,8 +37,38 @@ public class MyFrame extends JFrame {
         add(excelArea);
 
 
+        //menu
+        menu = new JMenuBar();
+        setJMenuBar(menu);
+
+        file = new JMenu("File");
+        menu.add(file);
+
+        loadFile = new JMenuItem("Load file");
+        file.add(loadFile);
+        loadFile.addActionListener(this);
+
     }
 
+    public void actionPerformed(ActionEvent e) {
+        Object obj = e.getSource();
+        if (obj == loadFile) {
+
+            JFileChooser fc = new JFileChooser();
+
+            if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                plik = fc.getSelectedFile();
+                savePath(plik);
+                //path = plik.getAbsolutePath();
+                //System.out.println(path);
+            }
+        }
+    }
+
+    public void savePath(File plik) {
+        path = plik.getAbsolutePath();
+        System.out.println(path);
+    }
 
 
 }
