@@ -11,7 +11,6 @@ public class MyPanel extends JPanel {
     public JButton nextButton;
 
 
-
     public MyPanel() {
 
         setLayout(null);
@@ -19,6 +18,8 @@ public class MyPanel extends JPanel {
         addLabels();
         addTextFields();
         addButtons();
+
+
     }
 
     //LABELS
@@ -79,6 +80,14 @@ public class MyPanel extends JPanel {
         add(nextButton);
         nextButton.setBounds(0, 90, 205, 50);
         nextButton.setBackground(Color.YELLOW);
+
+        MyFrame.testButton = new JButton("TEST");
+        MyFrame.testButton.setFont(new Font("Arial", Font.BOLD, 25));
+        MyFrame.testButton.setForeground(Color.MAGENTA);
+        MyFrame.testButton.setVisible(true);
+        add(MyFrame.testButton);
+        MyFrame.testButton.setBounds(0, 150, 205, 50);
+        MyFrame.testButton.setBackground(Color.YELLOW);
     }
 
 }

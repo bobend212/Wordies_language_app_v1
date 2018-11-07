@@ -3,15 +3,12 @@ package gui.build;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 public class MyFrame extends JFrame implements ActionListener {
 
-    JMenuBar menu;
-    JMenu file;
-    JMenuItem loadFile;
-    public String path;
-    public File plik;
+    public static JButton testButton;
+    ChooseData chooseData;
+
 
     public MyFrame() {
 
@@ -19,16 +16,20 @@ public class MyFrame extends JFrame implements ActionListener {
         //OKNO DIALOGOWE WYSWIETLANE PRZED URUCHOMIENIEM APLIKACJI
         //JOptionPane.showMessageDialog(null, "Pamietaj o wczytaniu slowek do Excela", "Witaj w Wordies", JOptionPane.INFORMATION_MESSAGE);
 
+        //OKNA WCZYTUJACE SCIEZKE I NAZWE PLIKU
+        //chooseData = new ChooseData();
 
+        //TWORZENIE GLOWNEGO GUI
+        createMainGUI();
+
+    }
+
+    public void createMainGUI() {
         setTitle("Wordies 1.1.0 ©mk");
         setSize(500, 500);
         setLocation(620, 300);
-        //setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        //setLayout(null);
-
-
 
         MyPanel panel = new MyPanel();
         add(panel);
@@ -36,38 +37,18 @@ public class MyFrame extends JFrame implements ActionListener {
         ExcelArea excelArea = new ExcelArea();
         add(excelArea);
 
-
-        //menu
-        menu = new JMenuBar();
-        setJMenuBar(menu);
-
-        file = new JMenu("File");
-        menu.add(file);
-
-        loadFile = new JMenuItem("Load file");
-        file.add(loadFile);
-        loadFile.addActionListener(this);
-
+        testButton.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-        Object obj = e.getSource();
-        if (obj == loadFile) {
+        Object source = e.getSource();
 
-            JFileChooser fc = new JFileChooser();
+        if (source == testButton) {
 
-            if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                plik = fc.getSelectedFile();
-                savePath(plik);
-                //path = plik.getAbsolutePath();
-                //System.out.println(path);
-            }
+            this.setVisible(false);
+
+            new ResultWindow();
         }
-    }
-
-    public void savePath(File plik) {
-        path = plik.getAbsolutePath();
-        System.out.println(path);
     }
 
 
