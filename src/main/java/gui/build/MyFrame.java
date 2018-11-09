@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MyFrame extends JFrame implements ActionListener {
+public class MyFrame extends JFrame {
 
     public static JButton testButton;
     ChooseData chooseData;
@@ -20,11 +20,23 @@ public class MyFrame extends JFrame implements ActionListener {
         //chooseData = new ChooseData();
 
         //TWORZENIE GLOWNEGO GUI
+
+
+
         createMainGUI();
+
 
     }
 
     public void createMainGUI() {
+
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         setTitle("Wordies 1.1.0 ©mk");
         setSize(500, 500);
         setLocation(620, 300);
@@ -37,19 +49,10 @@ public class MyFrame extends JFrame implements ActionListener {
         ExcelArea excelArea = new ExcelArea();
         add(excelArea);
 
-        testButton.addActionListener(this);
+
     }
 
-    public void actionPerformed(ActionEvent e) {
-        Object source = e.getSource();
 
-        if (source == testButton) {
-
-            this.setVisible(false);
-
-            new ResultWindow();
-        }
-    }
 
 
 }

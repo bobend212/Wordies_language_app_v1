@@ -12,20 +12,23 @@ import java.util.Random;
 
 public class ExcelArea extends MyPanel implements ActionListener {
 
-
-    public static String path;
     public static Object result1;
     public static Object result2;
+    public int counter;
 
     HSSFSheet sheet;
     HSSFWorkbook workbook;
     private int numberOfrow = 0;
     String[] translateToArray = new String[1];
-    private int counter = 0;
     ResultWindow resultWindow;
     String output2;
     MyFrame mainFrame;
     ExcelArea excelArea;
+    int progressValue = 1;
+    int attempts = 0;
+    int goodAnswer = 0;
+    int failAnswer = 0;
+
 
     String examplePath = "M:\\Java Projects\\mateuszwordies\\tester.xls";
 
@@ -54,6 +57,9 @@ public class ExcelArea extends MyPanel implements ActionListener {
         int wordsQty = sheet.getLastRowNum() + 1;
         counter = wordsQty;
 
+        pb.setMaximum(counter);
+        pb.setMinimum(0);
+
     }
 
 
@@ -70,29 +76,31 @@ public class ExcelArea extends MyPanel implements ActionListener {
         } else if (source == whatToTranslateTextField) {
 
             String output = whatToTranslateTextField.getText();
+            attempts++;
 
             if (output.equals(translateToArray[0])) {
-                System.out.println(path);
-                System.out.println("dobrze");
                 positiveResultLabel.setVisible(true);
                 negativeResultLabel.setVisible(false);
                 whatToTranslateTextField.setText("");
-                removeRow(sheet, numberOfrow);
+                goodAnswer++;
+                if (removeYes.isSelected()) {
+                    removeRow(sheet, numberOfrow);
+                    pb.setValue(progressValue++);
+                } else if (removeNo.isSelected()) {
+                    pb.setString("Attempts: " + attempts + " - " + "Good: " + goodAnswer + " , " + "Fails: " + failAnswer);
+                }
                 generateWord();
-                counter--;
-                System.out.println(counter); // <-- licznik slow
+                //counter--;
+                //System.out.println(counter); // <-- licznik slow
+
             } else {
-                System.out.println("zle");
                 whatToTranslateTextField.setText("");
                 negativeResultLabel.setVisible(true);
                 positiveResultLabel.setVisible(false);
                 //System.out.println(counter);
+                failAnswer++;
+                pb.setString("Attempts: " + attempts + " - " + "Good: " + goodAnswer + " , " + "Fails: " + failAnswer);
             }
-        } else if (source == MyFrame.testButton) {
-
-            this.setVisible(false);
-
-            new ResultWindow();
         }
     }
 
@@ -110,23 +118,30 @@ public class ExcelArea extends MyPanel implements ActionListener {
         }
     }
 
-
     private void generateWord() {
         try {
-            Random random = new Random();
             int words_amount = sheet.getLastRowNum();
-            int num = random.nextInt(words_amount + 1);
-            HSSFRow randomRow = sheet.getRow(num);
-            numberOfrow = num;
-            translateItLabel.setText(randomRow.getCell(0).getStringCellValue());
-            translateToArray[0] = randomRow.getCell(1).getStringCellValue();
-        } catch (NullPointerException e) {
-           // resultWindow = new ResultWindow();
+            if (randomYes.isSelected()) {
+                Random random = new Random();
 
+                int num = random.nextInt(words_amount + 1);
+                HSSFRow randomRow = sheet.getRow(num);
+                numberOfrow = num;
+                translateItLabel.setText(randomRow.getCell(0).getStringCellValue());
+                translateToArray[0] = randomRow.getCell(1).getStringCellValue();
+            }
+            else if (randomNo.isSelected()) {
+                //int words_amount = sheet.getLastRowNum();
+                HSSFRow noRandomRow = sheet.getRow(words_amount);
+
+                translateItLabel.setText(noRandomRow.getCell(0).getStringCellValue());
+                //translateToArray[0] = noRandomRow.getCell(1).getStringCellValue();
+            }
+        } catch (NullPointerException e) {
+
+            new ResultWindow();
 
             System.out.println("Koniec");
         }
     }
 }
-
-

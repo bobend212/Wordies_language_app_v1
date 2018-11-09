@@ -15,7 +15,7 @@ public class ResultWindow extends JFrame {
         setSize(500, 500);
         setLocation(620, 300);
         //setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
 
 
