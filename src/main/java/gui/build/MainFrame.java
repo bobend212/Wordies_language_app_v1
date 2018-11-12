@@ -62,6 +62,4 @@ public class MainFrame extends JFrame {
                 "\n Enjoy!",
                 "Welcome information's", JOptionPane.DEFAULT_OPTION);
     }
-
-
 }
