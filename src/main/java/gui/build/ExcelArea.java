@@ -24,7 +24,6 @@ public class ExcelArea extends MainPanel implements ActionListener {
     int failAnswer = 0;
 
     public ExcelArea() {
-
         importWords();
         nextButton.addActionListener(this);
         whatToTranslateTextField.addActionListener(this);
