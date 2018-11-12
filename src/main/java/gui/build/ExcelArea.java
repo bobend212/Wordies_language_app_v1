@@ -3,7 +3,6 @@ package gui.build;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.util.Random;
 
-public class ExcelArea extends MyPanel implements ActionListener {
+public class ExcelArea extends MainPanel implements ActionListener {
 
     public int counter;
     public static String pathName;
@@ -113,6 +112,7 @@ public class ExcelArea extends MyPanel implements ActionListener {
                 pb.setStringPainted(true);
 
             } else if (randomNo.isSelected()) {
+                pb.setStringPainted(true);
                 removeYes.setSelected(true);
                 HSSFRow row = sheet.getRow(0);
                 translateItLabel.setText(row.getCell(0).getStringCellValue());

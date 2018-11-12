@@ -5,11 +5,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 
-public class MyFrame extends JFrame {
+public class MainFrame extends JFrame {
 
-    public MyFrame() {
+    public MainFrame() {
 
-        //showWelcomeDialog();
+        showWelcomeDialog();
         loadFile();
         createMainGUI();
     }
@@ -23,11 +23,12 @@ public class MyFrame extends JFrame {
         }
 
         setTitle("Wordies 1.1.0 ©mk");
-        setSize(500, 500);
+        setSize(600, 350);
         setLocation(620, 300);
+        setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        MyPanel panel = new MyPanel();
+        MainPanel panel = new MainPanel();
         add(panel);
 
         ExcelArea excelArea = new ExcelArea();
@@ -54,8 +55,12 @@ public class MyFrame extends JFrame {
 
     public void showWelcomeDialog() {
 
-        JOptionPane.showConfirmDialog(null, "Congratulations! You know \n" + "them all!", "Welcome instructions", JOptionPane.DEFAULT_OPTION);
-
+        JOptionPane.showConfirmDialog(null, "1. Create excel file, \n" +
+                "2. Add your own words which you want learn, \n" +
+                "3. In 'A' column enter word and in the 'B' column enter your translation, \n" +
+                "4. Select your file and..." +
+                "\n Enjoy!",
+                "Welcome information's", JOptionPane.DEFAULT_OPTION);
     }
 
 
