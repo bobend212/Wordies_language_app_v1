@@ -2,20 +2,17 @@ package gui.build;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-
 
 public class MyPanel extends JPanel {
 
     public JLabel translateThisLabel, translateItLabel, inputLabel, positiveResultLabel, negativeResultLabel,
-        setRemovingLabel, setRandomWordsLabel;
+            setRemovingLabel, setRandomWordsLabel;
     public JTextField whatToTranslateTextField;
     public JButton nextButton;
     public JProgressBar pb;
     public JRadioButton removeYes, removeNo, randomYes, randomNo;
-
 
     public MyPanel() {
 
@@ -111,9 +108,7 @@ public class MyPanel extends JPanel {
         Border border = BorderFactory.createTitledBorder("Progress...");
         pb.setBorder(new TitledBorder(border));
         pb.setBorder(border);
-        pb.setStringPainted(true);
-
-
+        pb.setStringPainted(false);
     }
 
     //RADIO BUTTONS
@@ -139,9 +134,5 @@ public class MyPanel extends JPanel {
         groupRandom.add(randomNo);
         add(randomYes);
         add(randomNo);
-
     }
-
-
-
 }
