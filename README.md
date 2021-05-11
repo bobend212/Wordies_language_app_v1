@@ -37,8 +37,4 @@ You have available two options:
 I made this application with YouTube tutorials help from many channels, too many to list their. But I want thanks all which contributed and gave me new and fresh ideas when I wrote this.
 If I did have not go to school at weekends and go to work everyday, probably I could finished this app faster but it is how it is.
 
-### `Contact`
-Created by Mateusz Konopka [@mateusz.konopka11@gmail.com] - feel free to contact me!
-
-# `[Time to looking for a new challenges]`
 mk
